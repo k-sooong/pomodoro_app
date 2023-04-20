@@ -66,6 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
     timer.cancel();
   }
 
+  void onResetPomodoro() {
+    setState(
+      () {
+        totalPmodoro = 0;
+      },
+    );
+  }
+
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
     return duration.toString().split('.').first.substring(2, 7);
@@ -106,12 +114,37 @@ class _HomeScreenState extends State<HomeScreen> {
                         : Icons.play_circle_outline,
                   ),
                 ),
-                IconButton(
-                  iconSize: 48,
-                  color: Theme.of(context).cardColor,
-                  onPressed: onRestart,
-                  icon: const Icon(Icons.restore_outlined),
-                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: onRestart,
+                        child: Text(
+                          're time',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Theme.of(context).cardColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: onResetPomodoro,
+                        child: Text(
+                          're pomo',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Theme.of(context).cardColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
